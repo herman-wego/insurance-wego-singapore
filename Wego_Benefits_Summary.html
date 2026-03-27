@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wego Pte Ltd — Benefits Summary</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f0f2f5;
+    color: #1a1a2e;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1b2d4f 50%, #2a4a7f 100%);
+    color: white;
+    padding: 48px 32px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 70%, rgba(76, 175, 80, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(33, 150, 243, 0.1) 0%, transparent 50%);
+    animation: float 20s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-20px, -10px); }
+  }
+  .header * { position: relative; z-index: 1; }
+  .header h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .header .subtitle { font-size: 1rem; opacity: 0.8; font-weight: 400; }
+
+  .meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .meta-chip {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+
+  /* SECTION CARDS */
+  .section {
+    background: #fff;
+    border-radius: 16px;
+    margin-bottom: 28px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .section:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.06); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 22px 28px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border-bottom: 1px solid #eee;
+  }
+  .section-icon {
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .section-body { padding: 24px 28px; }
+
+  /* COLOR THEMES */
+  .theme-specialist .section-header { color: #5c4bba; }
+  .theme-specialist .section-icon { background: #ede9ff; }
+
+  .theme-outpatient .section-header { color: #0e7c61; }
+  .theme-outpatient .section-icon { background: #e3f7f0; }
+
+  .theme-dental .section-header { color: #c06a2b; }
+  .theme-dental .section-icon { background: #fff3e6; }
+
+  .theme-hospital .section-header { color: #c23a3a; }
+  .theme-hospital .section-icon { background: #fde8e8; }
+
+  .theme-claims .section-header { color: #2975b4; }
+  .theme-claims .section-icon { background: #e4f0fb; }
+
+  .theme-contact .section-header { color: #555; }
+  .theme-contact .section-icon { background: #f0f0f0; }
+
+  /* BENEFIT ITEMS */
+  .benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+  }
+  .benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #fafbfc;
+    border-radius: 10px;
+    border-left: 3px solid #ddd;
+    transition: background 0.15s;
+  }
+  .benefit-item:hover { background: #f3f5f7; }
+
+  .benefit-item .icon-dot {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .benefit-item .text { flex: 1; }
+  .benefit-item .label { font-size: 0.88rem; font-weight: 600; color: #222; }
+  .benefit-item .detail { font-size: 0.8rem; color: #666; margin-top: 3px; }
+  .benefit-item .limit {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #fff;
+    background: #333;
+    border-radius: 6px;
+    padding: 2px 8px;
+    display: inline-block;
+    margin-top: 5px;
+  }
+
+  /* Themed borders */
+  .theme-specialist .benefit-item { border-left-color: #c3b5f7; }
+  .theme-specialist .icon-dot { background: #ede9ff; color: #5c4bba; }
+
+  .theme-outpatient .benefit-item { border-left-color: #95dfc8; }
+  .theme-outpatient .icon-dot { background: #e3f7f0; color: #0e7c61; }
+
+  .theme-dental .benefit-item { border-left-color: #f5cfa0; }
+  .theme-dental .icon-dot { background: #fff3e6; color: #c06a2b; }
+
+  .theme-hospital .benefit-item { border-left-color: #f5a8a8; }
+  .theme-hospital .icon-dot { background: #fde8e8; color: #c23a3a; }
+
+  /* ALERT BOX */
+  .alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    margin-top: 16px;
+  }
+  .alert-warn { background: #fff8e5; border: 1px solid #ffe8a3; color: #7a5c00; }
+  .alert-info { background: #e8f4fd; border: 1px solid #b6dcf5; color: #1a5e8a; }
+  .alert-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+  /* TABLE */
+  .benefit-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.85rem;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e8e8e8;
+  }
+  .benefit-table th {
+    background: #f5f5f5;
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 600;
+    color: #444;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .benefit-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+  }
+  .benefit-table tr:last-child td { border-bottom: none; }
+  .benefit-table tr:hover td { background: #fafbfc; }
+  .benefit-table .amt {
+    font-weight: 600;
+    color: #1a1a2e;
+    white-space: nowrap;
+    text-align: right;
+  }
+  .benefit-table .cat { font-weight: 500; }
+  .benefit-table .sub { color: #888; font-size: 0.8rem; padding-left: 24px; }
+
+  /* HOSPITAL CHIPS */
+  .hospital-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .hospital-chip {
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+  .chip-public { background: #e8f4fd; color: #1a5e8a; border: 1px solid #c8e3f5; }
+  .chip-private { background: #f3e8fd; color: #6a2ca0; border: 1px solid #dbc8f5; }
+
+  /* CONTACT */
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 24px;
+    background: #f8f9fa;
+    border-radius: 12px;
+  }
+  .contact-avatar {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .contact-info .name { font-weight: 700; font-size: 1rem; }
+  .contact-info .role { font-size: 0.82rem; color: #888; margin-bottom: 4px; }
+  .contact-info a { color: #2975b4; text-decoration: none; font-size: 0.88rem; font-weight: 500; }
+  .contact-info a:hover { text-decoration: underline; }
+
+  /* DENTAL LIST */
+  .dental-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .dental-cat {
+    padding: 16px;
+    background: #fafbfc;
+    border-radius: 10px;
+    border-left: 3px solid #f5cfa0;
+  }
+  .dental-cat .cat-title { font-weight: 700; font-size: 0.9rem; color: #c06a2b; margin-bottom: 6px; }
+  .dental-cat .cat-items { font-size: 0.82rem; color: #555; }
+  .dental-cat .cat-items span { display: block; padding: 2px 0; }
+
+  /* MMP HIGHLIGHT */
+  .mmp-box {
+    background: linear-gradient(135deg, #fef3f3 0%, #fdf0f8 100%);
+    border: 1px solid #f5c6c6;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-top: 18px;
+  }
+  .mmp-box h4 { color: #c23a3a; font-size: 1rem; margin-bottom: 8px; }
+  .mmp-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.88rem; border-bottom: 1px dashed #f0d0d0; }
+  .mmp-row:last-child { border-bottom: none; }
+  .mmp-row .mmp-label { color: #666; }
+  .mmp-row .mmp-value { font-weight: 700; color: #c23a3a; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .header h1 { font-size: 1.4rem; }
+    .benefit-grid { grid-template-columns: 1fr; }
+    .dental-categories { grid-template-columns: 1fr; }
+    .meta-bar { flex-direction: column; align-items: center; }
+    .section-body { padding: 18px 16px; }
+    .contact-card { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>Wego Pte Ltd — Employee Benefits</h1>
+  <p class="subtitle">Group Insurance Benefits Summary (All Other Employees)</p>
+  <div class="meta-bar">
+    <span class="meta-chip">Policy G0009561</span>
+    <span class="meta-chip">Great Eastern</span>
+    <span class="meta-chip">1 May – 30 Apr</span>
+    <span class="meta-chip">Employees + Dependents</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ===== 1. SPECIALIST ===== -->
+  <div class="section theme-specialist">
+    <div class="section-header">
+      <div class="section-icon">&#x1F9D1;&#x200D;&#x2695;&#xFE0F;</div>
+      Group Specialist
+    </div>
+    <div class="section-body">
+      <div class="benefit-grid">
+
+        <div class="benefit-item">
+          <div class="icon-dot">&#x1F3E5;</div>
+          <div class="text">
+            <div class="label">Government Hospital</div>
+            <div class="detail">As charged &amp; cashless. Requires referral from Panel GP.</div>
+            <span class="limit">As Charged</span>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="icon-dot">&#x1F4B3;</div>
+          <div class="text">
+            <div class="label">Private Specialist</div>
+            <div class="detail">Panel: Cashless. Non-Panel: Reimbursement. Referral from registered medical practitioner required.</div>
+            <span class="limit">S$1,000 / year</span>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="icon-dot">&#x1F476;</div>
+          <div class="text">
+            <div class="label">Paediatrician (Direct Access)</div>
+            <div class="detail">No referral needed for insured dependents below 7 years old.</div>
+            <span class="limit">S$35 / visit</span>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="icon-dot">&#x1F4CB;</div>
+          <div class="text">
+            <div class="label">Diagnostic Scans &amp; Physio</div>
+            <div class="detail">MRI, CT, PET, high-field scans &amp; outpatient physiotherapy. Referral required.</div>
+            <span class="limit">S$1,000 / year</span>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="icon-dot">&#x1F9E0;</div>
+          <div class="text">
+            <div class="label">Mental Wellness</div>
+            <div class="detail">Teleconsultation only. No referral needed. Call to book first.</div>
+            <span class="limit">2 sessions / year</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="alert alert-warn">
+        <span class="alert-icon">&#x26A0;&#xFE0F;</span>
+        <span><strong>Important:</strong> A referral letter is mandatory for all specialist visits unless stated otherwise. Call to make an appointment before visiting.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 2. OUTPATIENT ===== -->
+  <div class="section theme-outpatient">
+    <div class="section-header">
+      <div class="section-icon">&#x1FA7A;</div>
+      Group Outpatient
+    </div>
+    <div class="section-body">
+      <div class="benefit-grid">
+
+        <div class="benefit-item">
+          <div class="icon-dot">&#x2705;</div>
+          <div class="text">
+            <div class="label">Panel Clinics (incl. Telemedicine)</div>
+            <div class="detail">As charged &amp; cashless. Just present your medical card.</div>
+            <span class="limit">As Charged</span>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="icon-dot">&#x1F3E5;</div>
+          <div class="text">
+            <div class="label">Polyclinics</div>
+            <div class="detail">As charged &amp; cashless.</div>
+            <span class="limit">As Charged</span>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="icon-dot">&#x1F6A8;</div>
+          <div class="text">
+            <div class="label">A&amp;E (Emergency)</div>
+            <div class="detail">Govt Hospital: As charged &amp; cashless. Private Hospital: Capped.</div>
+            <span class="limit">Up to S$120 / visit (Private)</span>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="icon-dot">&#x1F52C;</div>
+          <div class="text">
+            <div class="label">Radiology &amp; Lab</div>
+            <div class="detail">Panel facilities only. Requires referral from Panel Clinic.</div>
+            <span class="limit">As Charged</span>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="icon-dot">&#x1F4B5;</div>
+          <div class="text">
+            <div class="label">Non-Panel GP</div>
+            <div class="detail">Reimbursement basis.</div>
+            <span class="limit">Up to S$35 / visit</span>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="icon-dot">&#x2708;&#xFE0F;</div>
+          <div class="text">
+            <div class="label">Overseas GP</div>
+            <div class="detail">Reimbursement basis.</div>
+            <span class="limit">Up to S$100 / visit</span>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="icon-dot">&#x1F33F;</div>
+          <div class="text">
+            <div class="label">TCM (Traditional Chinese Medicine)</div>
+            <div class="detail">Limited to 6 visits per policy period.</div>
+            <span class="limit">Up to S$30 / visit</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 3. DENTAL ===== -->
+  <div class="section theme-dental">
+    <div class="section-header">
+      <div class="section-icon">&#x1F9B7;</div>
+      Group Dental
+    </div>
+    <div class="section-body">
+      <div class="dental-categories">
+        <div class="dental-cat">
+          <div class="cat-title">1. Consultation &amp; Fillings</div>
+          <div class="cat-items">
+            <span>Consultation &amp; Examination</span>
+            <span>Scaling &amp; Polishing</span>
+            <span>Composite Fillings (up to 2 surfaces)</span>
+            <span>Amalgam Fillings (up to 2 surfaces)</span>
+          </div>
+        </div>
+        <div class="dental-cat">
+          <div class="cat-title">2. Dental X-Rays</div>
+          <div class="cat-items">
+            <span>Intraoral — Occlusal / Periapical / Bitewing</span>
+            <span>Extraoral — Panoramic / OPG / Cephalogram</span>
+          </div>
+        </div>
+        <div class="dental-cat">
+          <div class="cat-title">3. Extractions &amp; Consumables</div>
+          <div class="cat-items">
+            <span>Simple / Routine extraction</span>
+            <span>Surgical / Complex extraction</span>
+            <span>Impacted Wisdom tooth extraction</span>
+            <span>Fluoride treatment</span>
+          </div>
+        </div>
+        <div class="dental-cat">
+          <div class="cat-title">4. Drugs</div>
+          <div class="cat-items">
+            <span>Analgesics (Oral) — related to procedures</span>
+            <span>Antibiotics (Oral) — related to procedures</span>
+          </div>
+        </div>
+        <div class="dental-cat">
+          <div class="cat-title">5. Root Canal Treatment</div>
+          <div class="cat-items">
+            <span>Pulpotomy &amp; Pulp Cap</span>
+            <span>Anterior / Premolar / Molar tooth</span>
+            <span>Subsequent canals</span>
+          </div>
+        </div>
+        <div class="dental-cat">
+          <div class="cat-title">6. Alveoplasty</div>
+          <div class="cat-items">
+            <span>Per quadrant (with / without extractions)</span>
+            <span>Complete alveoplasty (multi-quadrant)</span>
+          </div>
+        </div>
+        <div class="dental-cat">
+          <div class="cat-title">7. Others</div>
+          <div class="cat-items">
+            <span>Biopsy &amp; tissue examination</span>
+            <span>Excision of tumour</span>
+          </div>
+        </div>
+        <div class="dental-cat" style="border-left-color: #4caf50;">
+          <div class="cat-title" style="color: #2e7d32;">8. Co-insurance</div>
+          <div class="cat-items" style="font-weight: 600; color: #2e7d32;">Nil — no co-pay required</div>
+        </div>
+      </div>
+
+      <div class="alert alert-warn">
+        <span class="alert-icon">&#x26A0;&#xFE0F;</span>
+        <span><strong>Panel dental clinics only.</strong> Non-panel dental clinics are not covered. Call to make an appointment before visiting.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 4. HOSPITAL & SURGICAL ===== -->
+  <div class="section theme-hospital">
+    <div class="section-header">
+      <div class="section-icon">&#x1F3E5;</div>
+      Group Hospital &amp; Surgical (GHS)
+    </div>
+    <div class="section-body">
+      <table class="benefit-table">
+        <thead>
+          <tr><th style="width:65%">Benefit (Per Disability)</th><th class="amt">Limit (S$)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="cat">1a. Daily Room &amp; Board (max 120 days incl. ICU)</td><td class="amt">2-Bedded Private</td></tr>
+          <tr><td class="cat">b. Intensive Care Unit</td><td class="amt">10,000</td></tr>
+          <tr><td class="cat">c. Hospital Miscellaneous Services<br><span style="color:#888;font-size:0.8rem">Surgical implants subject to 20% co-insurance</span></td><td class="amt">20,000 / disability</td></tr>
+          <tr><td class="cat">d. Surgery</td><td class="amt">Waiver of Surgical Schedule</td></tr>
+          <tr><td class="cat">e. Daily In-Hospital Doctor Visit (max 90 days)</td><td class="amt">—</td></tr>
+          <tr><td class="cat">f. Pre-Hospitalisation Diagnostic Tests<br><span style="color:#888;font-size:0.8rem">Within 90 days prior to admission</span></td><td class="amt">—</td></tr>
+          <tr><td class="cat">g. Pre-Hospitalisation Specialist Consultation<br><span style="color:#888;font-size:0.8rem">Within 90 days prior to admission</span></td><td class="amt">—</td></tr>
+          <tr><td class="cat">h. Post-Hospitalisation / Surgery Treatment<br><span style="color:#888;font-size:0.8rem">Up to 90 days after discharge</span></td><td class="amt">—</td></tr>
+          <tr><td class="cat">i. Emergency Outpatient Treatment (accident only)<br><span style="color:#888;font-size:0.8rem">Within 24 hrs of accident, follow-up up to 31 days</span></td><td class="amt">—</td></tr>
+          <tr><td class="cat">j. Emergency Outpatient Dental (accident only)<br><span style="color:#888;font-size:0.8rem">Within 24 hrs of accident, follow-up up to 31 days</span></td><td class="amt">—</td></tr>
+          <tr><td class="cat">k. Miscarriage (incl. ectopic pregnancy)</td><td class="amt">—</td></tr>
+          <tr><td class="cat">l. Home Nursing (max 182 days / policy period)</td><td class="amt">—</td></tr>
+          <tr><td class="cat">m. Outpatient Kidney Dialysis</td><td class="amt">20,000 / year</td></tr>
+          <tr><td class="cat">n. Outpatient Cancer Treatment</td><td class="amt">—</td></tr>
+          <tr><td class="cat">o. Overseas Hospitalisation (accident)</td><td class="amt">150% of benefits (a)–(h)</td></tr>
+          <tr><td class="cat">p. Parental Accommodation (max 60 days)</td><td class="amt">100 / day</td></tr>
+          <tr><td class="cat">q. Funeral Expense</td><td class="amt">10,000</td></tr>
+          <tr><td class="cat">r. Mental Wellness</td><td class="amt">1,000 / year</td></tr>
+          <tr><td class="cat">s. Rehabilitation Benefit (max 31 days)</td><td class="amt">5,000</td></tr>
+          <tr>
+            <td class="cat">t. Hospital Cash Benefit<br><span style="color:#888;font-size:0.8rem">Per day, up to 90 days in Govt Restructured Hospital</span></td>
+            <td class="amt" style="line-height:1.8">
+              B1 Ward: 150<br>
+              B2/B2+: 250<br>
+              C Ward: 300
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Major Medical Plus -->
+      <div class="mmp-box">
+        <h4>Major Medical Plus</h4>
+        <p style="font-size:0.85rem; color:#666; margin-bottom:12px;">Reimburses eligible expenses <em>beyond</em> the GHS limits above. No activation conditions.</p>
+        <div class="mmp-row"><span class="mmp-label">Coverage Limit</span><span class="mmp-value">S$80,000 / policy period</span></div>
+        <div class="mmp-row"><span class="mmp-label">Deductible</span><span class="mmp-value">Basic GHS</span></div>
+        <div class="mmp-row"><span class="mmp-label">Co-insurance (your share)</span><span class="mmp-value">20%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 5. CLAIMS ===== -->
+  <div class="section theme-claims">
+    <div class="section-header">
+      <div class="section-icon">&#x1F4C4;</div>
+      How to Claim
+    </div>
+    <div class="section-body">
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+        <!-- Outpatient Claims -->
+        <div style="padding:18px; background:#f8fbff; border-radius:12px; border:1px solid #d8e8f8;">
+          <h4 style="font-size:0.95rem; color:#2975b4; margin-bottom:10px;">Outpatient &amp; Specialist Claims</h4>
+          <div style="font-size:0.84rem; color:#444; line-height:1.7;">
+            <strong>Panel visits:</strong> Use your medical card (cashless) — no claims needed.<br><br>
+            <strong>Non-panel visits (reimbursement):</strong><br>
+            1. Get a GP referral for specialist claims<br>
+            2. Collect original itemised bills/receipts<br>
+            3. Include referral letter for specialist/X-ray/lab claims<br>
+            4. Include prescription for drug purchases<br>
+            5. Submit within <strong>30 days</strong> of discharge
+          </div>
+        </div>
+
+        <!-- Hospital Claims -->
+        <div style="padding:18px; background:#fff8f8; border-radius:12px; border:1px solid #f5d0d0;">
+          <h4 style="font-size:0.95rem; color:#c23a3a; margin-bottom:10px;">Hospital &amp; Surgical Claims</h4>
+          <div style="font-size:0.84rem; color:#444; line-height:1.7;">
+            <strong>Planned admission:</strong> Request eLOG via <strong>GREAT Med+</strong> app for cashless pre-approval.<br><br>
+            <strong>Claims documents needed:</strong><br>
+            1. Original final &amp; detailed hospital bill<br>
+            2. Pre &amp; post hospitalisation invoices<br>
+            3. Ambulatory / pre-admission form<br>
+            4. Inpatient discharge summary<br>
+            5. GP referral letter &amp; lab referral forms<br>
+            6. Submit within <strong>30 days</strong> of discharge
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info" style="margin-top:18px;">
+        <span class="alert-icon">&#x1F4F1;</span>
+        <span>All reimbursement claims can be submitted through the <strong>E-Benefits Portal</strong>.</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== 6. PARTICIPATING HOSPITALS ===== -->
+  <div class="section theme-claims">
+    <div class="section-header">
+      <div class="section-icon">&#x1F3E5;</div>
+      Participating Hospitals (Cashless)
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.85rem; color:#666; margin-bottom:14px;"><strong>Restructured (Government) Hospitals:</strong></p>
+      <div class="hospital-grid">
+        <span class="hospital-chip chip-public">Alexandra Hospital</span>
+        <span class="hospital-chip chip-public">Changi General Hospital</span>
+        <span class="hospital-chip chip-public">Khoo Teck Puat Hospital</span>
+        <span class="hospital-chip chip-public">KK Women's &amp; Children's</span>
+        <span class="hospital-chip chip-public">National University Hospital</span>
+        <span class="hospital-chip chip-public">Ng Teng Fong Hospital</span>
+        <span class="hospital-chip chip-public">Sengkang General Hospital</span>
+        <span class="hospital-chip chip-public">Singapore General Hospital</span>
+        <span class="hospital-chip chip-public">Tan Tock Seng Hospital</span>
+        <span class="hospital-chip chip-public">Admiralty Medical Centre</span>
+        <span class="hospital-chip chip-public">SG National Eye Centre</span>
+        <span class="hospital-chip chip-public">National Heart Centre</span>
+        <span class="hospital-chip chip-public">National Neuroscience Institute</span>
+      </div>
+
+      <p style="font-size:0.85rem; color:#666; margin: 18px 0 14px;"><strong>Private Hospitals:</strong></p>
+      <div class="hospital-grid">
+        <span class="hospital-chip chip-private">Farrer Park Hospital</span>
+        <span class="hospital-chip chip-private">Gleneagles Hospital</span>
+        <span class="hospital-chip chip-private">Mount Alvernia Hospital</span>
+        <span class="hospital-chip chip-private">Mount Elizabeth Hospital</span>
+        <span class="hospital-chip chip-private">Mount Elizabeth Novena</span>
+        <span class="hospital-chip chip-private">Parkway East Hospital</span>
+        <span class="hospital-chip chip-private">Raffles Hospital</span>
+        <span class="hospital-chip chip-private">Thomson Medical Hospital</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 7. CONTACT ===== -->
+  <div class="section theme-contact">
+    <div class="section-header">
+      <div class="section-icon">&#x1F4DE;</div>
+      Questions? Contact
+    </div>
+    <div class="section-body">
+      <div class="contact-card">
+        <div class="contact-avatar">JO</div>
+        <div class="contact-info">
+          <div class="name">Jenelle Ong</div>
+          <div class="role">Finexis — Group Insurance Advisor</div>
+          <a href="tel:+6594387731">+65 9438 7731</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="mailto:jenelle.ong@finexis.com.sg">jenelle.ong@finexis.com.sg</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
